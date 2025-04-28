@@ -6,3 +6,11 @@ LogID: c4a685c5-678a-453b-805e-3d860846f058
 Error: ENOENT: no such file or directory, open 'C:\Users\Rophi\Projects\Tutorials\DaveGrayNodeJS\src\mockFiles\fake2.txt'
 27/04/2025 06:11:24 PM
 
+LogID: 717ce22a-b49a-48da-aabd-13895c4854c2
+Error: Let us see what this brings
+27/04/2025 06:13:26 PM
+
+LogID: b4077744-f1c9-4944-ac79-aa7bf60e79e5
+Error: Let us see what this brings
+27/04/2025 06:37:48 PM
+

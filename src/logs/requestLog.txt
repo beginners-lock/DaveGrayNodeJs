@@ -1,0 +1,17 @@
+LogID: 7065dab0-eb91-421d-8b55-d015ebd61a65
+Origin: undefined
+Method: POST
+28/04/2025 10:42:21 AM
+
+LogID: d8da253a-ed56-4346-a171-8ffee2915250
+Origin: undefined
+Method: GET
+Dest: /checker
+28/04/2025 10:43:50 AM
+
+LogID: 65453f17-5dfd-4de3-95e9-2179beb6fd9f
+Origin: undefined
+Method: POST
+Dest: /auth/register
+28/04/2025 10:43:54 AM
+
