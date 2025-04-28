@@ -10,6 +10,7 @@ import authRouter from './routes/auth/index';
 import usersRouter from './routes/users/index';
 import bodyParser from "body-parser";
 import requestLoggerMiddleware from './middleware/logger';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 configDotenv();
@@ -17,6 +18,7 @@ configDotenv();
 const port = process.env.PORT;
 
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 //Request Logger Middleware
 app.use(requestLoggerMiddleware);

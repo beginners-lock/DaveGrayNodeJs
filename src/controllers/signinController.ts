@@ -3,6 +3,8 @@ import data from './../models/users.json';
 import { UserType } from "../types";
 import bcrypt from "bcrypt";
 import { errorLogger } from "../utils/loggerFn";
+import createKeys from "../utils/createKeys";
+import updateUsers from "../utils/updateUsers";
 
 export default function (req: Request, res: Response){
     try{
@@ -13,20 +15,28 @@ export default function (req: Request, res: Response){
         if(!password){ res.status(400).send({message: 'Password is not provided'}); throw new Error('Password is not provided'); }
 
         //Check for user
-        const userFound = users.find(user => user.username===username);
+        const userIndex = users.findIndex(user => user.username===username);
         
-        if(userFound===undefined){
+        if(userIndex===-1){
             res.status(400).send({message: 'User not found'})
             return
         }
 
         //Confirm password
-        const accurate = bcrypt.compareSync(password, userFound.password)
+        const accurate = bcrypt.compareSync(password, users[userIndex].password)
 
         if(!accurate){
-            res.status(200).send({message: 'Invalid credentials'});
+            res.status(400).send({message: 'Invalid credentials'});
         }else{
-            res.status(200).send({message: 'Success'});
+            //Create the access and referesh tokens
+            const { accessToken, refreshToken } = createKeys({ username });
+            
+            //Update refreshToken for the user on the users list
+            users[userIndex].refreshToken = refreshToken;
+            updateUsers(users);
+
+            res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'none', maxAge: 24*60*60*1000 });
+            res.status(200).send({message: 'Success', accessToken});
         }
     }catch(error){
         console.log(error);

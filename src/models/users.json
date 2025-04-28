@@ -1,7 +1,8 @@
 [
   {
     "username": "Rophi",
-    "password": "$2b$10$Cj4.XIRGv6GxCRRQqeXkVu98i8JniEpxHl2dK4YV5nuyJhfHwV0tm"
+    "password": "$2b$10$Cj4.XIRGv6GxCRRQqeXkVu98i8JniEpxHl2dK4YV5nuyJhfHwV0tm",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlJvcGhpIiwiaWF0IjoxNzQ1ODUzNjkwLCJleHAiOjE3NDU5NDAwOTB9.ufyzRxkE_MSTOOL0eZ9isW-Rm9RTDQt78AFGeIGgm2o"
   },
   {
     "username": "John",
