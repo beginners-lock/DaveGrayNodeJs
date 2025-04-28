@@ -1,4 +1,4 @@
-declare interface UserType {
+export interface UserType {
     username: string
     password: string
 }

@@ -1,33 +1,33 @@
-import { Request, Response } from "express";
+import  { Response, Request } from "express";
 import data from './../models/users.json';
+import { UserType } from "../types";
 import bcrypt from "bcrypt";
 import { errorLogger } from "../utils/loggerFn";
-import { UserType } from "../types";
-import updateUsers from "../utils/updateUsers";
 
 export default function (req: Request, res: Response){
-    const users: UserType[] = data;
-    
     try{
+        const users: UserType[] = data;
         const { username, password } = req.body;
 
         if(!username){ res.status(400).send({message: 'Username is not provided'}); throw new Error('Username is not provided'); }
         if(!password){ res.status(400).send({message: 'Password is not provided'}); throw new Error('Password is not provided'); }
 
-        //Check for similar 
-        const similarUser = users.filter(user => user.username===username);
+        //Check for user
+        const userFound = users.find(user => user.username===username);
         
-        if(similarUser.length>0){
-            res.status(400).send({ message: 'Username already exists' });
+        if(userFound===undefined){
+            res.status(400).send({message: 'User not found'})
             return
         }
 
-        //Add User to json data
-        const hashed = bcrypt.hashSync(password, 10);
-        users.push({ username, password: hashed });
-        updateUsers(users);
+        //Confirm password
+        const accurate = bcrypt.compareSync(password, userFound.password)
 
-        res.status(200).send({ message: 'Success' });
+        if(!accurate){
+            res.status(200).send({message: 'Invalid credentials'});
+        }else{
+            res.status(200).send({message: 'Success'});
+        }
     }catch(error){
         console.log(error);
         errorLogger(error as string);
