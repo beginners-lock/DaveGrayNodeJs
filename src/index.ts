@@ -7,6 +7,7 @@ import fs from 'fs/promises';
 import { appendStream } from "./utils/fsStreams";
 import { format } from "date-fns";
 import authRouter from './routes/auth/index';
+import usersRouter from './routes/users/index';
 import bodyParser from "body-parser";
 import requestLoggerMiddleware from './middleware/logger';
 
@@ -21,6 +22,7 @@ app.use(bodyParser.json());
 app.use(requestLoggerMiddleware);
 
 app.use('/auth', authRouter);
+app.use('/users', usersRouter)
 
 /*app.get('/tester', async (req, res) => {
     try{
